@@ -10,6 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
+import java.util.Objects;
+
 @Entity
 @Table(name = "livros")
 public class Livro {
@@ -57,4 +59,36 @@ public class Livro {
         return biblioteca;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public void setAnoDePublicacao(Integer anoDePublicacao) {
+        this.anoDePublicacao = anoDePublicacao;
+    }
+
+    public void setBiblioteca(Biblioteca biblioteca) {
+        this.biblioteca = biblioteca;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Livro livro = (Livro) o;
+        return Objects.equals(titulo, livro.titulo) && Objects.equals(autor, livro.autor) && Objects.equals(anoDePublicacao, livro.anoDePublicacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titulo, autor, anoDePublicacao);
+    }
 }

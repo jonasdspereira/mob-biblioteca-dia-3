@@ -9,6 +9,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,8 +23,8 @@ public class Biblioteca {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @OneToMany(mappedBy = "biblioteca", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    private List<Livro> livros;
+    @OneToMany(mappedBy = "biblioteca", cascade = {CascadeType.REMOVE,CascadeType.PERSIST}, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Livro> livros = new ArrayList<>();
 
     protected Biblioteca() {
 
